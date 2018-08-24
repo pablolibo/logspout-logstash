@@ -1,7 +1,7 @@
 # logspout-logstash-multiline
 
-[![Docker Hub](https://img.shields.io/docker/pulls/bekt/logspout-logstash.svg?maxAge=2592000?style=plastic)](https://hub.docker.com/r/bekt/logspout-logstash/)
-[![](https://img.shields.io/docker/automated/bekt/logspout-logstash.svg?maxAge=2592000)](https://hub.docker.com/r/bekt/logspout-logstash/builds/) [![](https://images.microbadger.com/badges/image/bekt/logspout-logstash.svg)](https://microbadger.com/images/bekt/logspout-logstash "Get your own image badge on microbadger.com")
+[![Docker Hub](https://img.shields.io/docker/pulls/bekt/logspout-logstash.svg?maxAge=2592000?style=plastic)](https://hub.docker.com/r/pablolibo/logspout-logstash-multiline/)
+[![](https://img.shields.io/docker/automated/pablolibo/logspout-logstash-multiline.svg?maxAge=2592000)](https://hub.docker.com/r/pablolibo/logspout-logstash-multiline/builds/) [![](https://images.microbadger.com/badges/image/pablolibo/logspout-logstash.svg)](https://microbadger.com/images/pablolibo/logspout-logstash "Get your own image badge on microbadger.com")
 
 
 Tiny [Logspout](https://github.com/gliderlabs/logspout) adapter to send Docker container logs to [Logstash](https://github.com/elastic/logstash) via UDP or TCP. This just the hosted working version of [looplab/logspout-logstash](https://github.com/looplab/logspout-logstash).
@@ -9,32 +9,39 @@ Tiny [Logspout](https://github.com/gliderlabs/logspout) adapter to send Docker c
 
 ## Example
 
-A sample `docker-compose.yaml` file:
+A sample `docker-compose.yaml` for swarm file:
 
 ```yaml
-version: "2"
+version: '3.6'
 services:
   logspout:
-    image: bekt/logspout-logstash
-    restart: on-failure
+    image: pablolibo/logspout-logstash-multiline
     environment:
-      ROUTE_URIS: logstash://logstash:5000
+      - LOGSPOUT=ignore
+      - MULTILINE_ENABLE_DEFAULT=true
+      - ROUTE_URIS=logstash://logstash.domain.io:5000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-
-  logstash:
-    image: logstash:2.3
-    command: -f /opt/logstash/sample.conf
-    volumes:
-      - ./logstash/:/opt/logstash
-
-
-    # This is just an example.
-    # Normally you would put your own services in this file.
-    # Similar setup works on Kubernetes as well.
-    redis:
-      image: redis
-      restart: always
+    logging:
+      driver: json-file
+      options:
+        max-size: '12m'
+        max-file: '5'
+    deploy:
+      mode: global
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 256M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+    healthcheck:
+      test: "wget -q --spider http://localhost/health"
+      interval: 3s
+      timeout: 3s
+      retries: 6
+      start_period: 3s
 ```
 
 
