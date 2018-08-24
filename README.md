@@ -1,7 +1,7 @@
 # logspout-logstash-multiline
 
 [![Docker Hub](https://img.shields.io/docker/pulls/bekt/logspout-logstash.svg?maxAge=2592000?style=plastic)](https://hub.docker.com/r/pablolibo/logspout-logstash-multiline/)
-[![](https://img.shields.io/docker/automated/pablolibo/logspout-logstash-multiline.svg?maxAge=2592000)](https://hub.docker.com/r/pablolibo/logspout-logstash-multiline/builds/) [![](https://images.microbadger.com/badges/image/pablolibo/logspout-logstash.svg)](https://microbadger.com/images/pablolibo/logspout-logstash "Get your own image badge on microbadger.com")
+[![](https://img.shields.io/docker/automated/pablolibo/logspout-logstash-multiline.svg?maxAge=2592000)](https://hub.docker.com/r/pablolibo/logspout-logstash-multiline/builds/) [![](https://images.microbadger.com/badges/image/pablolibo/logspout-logstash-multiline.svg)](https://microbadger.com/images/pablolibo/logspout-logstash-multiline "Get your own image badge on microbadger.com")
 
 
 Tiny [Logspout](https://github.com/gliderlabs/logspout) adapter to send Docker container logs to [Logstash](https://github.com/elastic/logstash) via UDP or TCP. This just the hosted working version of [looplab/logspout-logstash](https://github.com/looplab/logspout-logstash).
