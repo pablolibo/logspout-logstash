@@ -1,4 +1,4 @@
-# logspout-logstash
+# logspout-logstash-multiline
 
 [![Docker Hub](https://img.shields.io/docker/pulls/bekt/logspout-logstash.svg?maxAge=2592000?style=plastic)](https://hub.docker.com/r/bekt/logspout-logstash/)
 [![](https://img.shields.io/docker/automated/bekt/logspout-logstash.svg?maxAge=2592000)](https://hub.docker.com/r/bekt/logspout-logstash/builds/) [![](https://images.microbadger.com/badges/image/bekt/logspout-logstash.svg)](https://microbadger.com/images/bekt/logspout-logstash "Get your own image badge on microbadger.com")
